@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-
 from config.database import cursor, connection
+from werkzeug.security import check_password_hash
 
 empresa_bp = Blueprint("empresa", __name__)
 
@@ -12,7 +12,7 @@ def create():
     INSERT INTO empresa (razao, cnpj, telefone, email, cep, endereco, numero, bloco, bairro, cidade, uf, senha) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
     """
     insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), (body["senha"])
-    cursor.execute(insert_sql, insert_tuple)     
+    cursor.execute(insert_sql, insert_tuple,)     
     connection.commit()
     return {}, 201
 
