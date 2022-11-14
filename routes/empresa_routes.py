@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from config.database import cursor, connection
-import bcrypt
+#import bcrypt
 
 empresa_bp = Blueprint("empresa", __name__)
 
@@ -11,8 +11,8 @@ def create():
     insert_sql = """
     INSERT INTO empresa (razao, cnpj, telefone, email, cep, endereco, numero, bloco, bairro, cidade, uf, senha) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
     """
-    hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
-    insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), hashed
+    #hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
+    insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), (body["senha"])
     cursor.execute(insert_sql, insert_tuple,)     
     connection.commit()
     return {}, 201
@@ -43,9 +43,9 @@ def update(empresa_id):
     update_sql = """
     UPDATE empresa SET razao = %s, cnpj = %s, telefone = %s, email = %s, cep = %s, endereco = %s, numero = %s, bloco = %s, bairro = %s, cidade = %s, uf = %s, senha = %s WHERE id = %s
     """
-    hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
+    #hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
     update_tuple = (body["razao"], body["cnpj"], body["telefone"], body["email"], body["cep"], body["endereco"], body["numero"], body["bloco"], body["bairro"], body["cidade"], body["uf"], 
-    hashed, empresa_id)
+    (body["senha"]), empresa_id)
     cursor.execute(update_sql, update_tuple)
     connection.commit()
     return {}, 200
