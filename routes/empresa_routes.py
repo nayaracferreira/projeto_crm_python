@@ -15,6 +15,14 @@ def create():
     insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), (body["senha"])
     cursor.execute(insert_sql, insert_tuple,)     
     connection.commit()
+    razao_empresa = body["razao"]   
+    razao_empresa_2 = razao_empresa.replace(' ', '_')
+    script_tabela_calendario = f'''CREATE TABLE IF NOT EXISTS {razao_empresa_2}           
+                    (dia_mes_ano VARCHAR(8) NOT NULL,
+                     email_empressa VARCHAR NOT NULL,
+                     nota_Dia VARCHAR NOT NULL)'''
+    cursor.execute(script_tabela_calendario)
+    connection.commit()
     return {}, 201
 
 # READ
