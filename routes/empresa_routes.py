@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from config.database import cursor, connection
-#import bcrypt
+import bcrypt
 
 empresa_bp = Blueprint("empresa", __name__)
 
@@ -9,10 +9,9 @@ empresa_bp = Blueprint("empresa", __name__)
 def create():
     body = request.json    
     insert_sql = """
-    INSERT INTO empresa (razao, cnpj, telefone, email, cep, endereco, numero, bloco, bairro, cidade, uf, senha) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-    """
-    #hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
-    insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), (body["senha"])
+    INSERT INTO empresa (razao, cnpj, telefone, email, cep, endereco, numero, bloco, bairro, cidade, uf, senha) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);    """
+    hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
+    insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), hashed.decode("utf-8")
     cursor.execute(insert_sql, insert_tuple,)     
     connection.commit()
     razao_empresa = body["razao"]   
@@ -20,10 +19,28 @@ def create():
     script_tabela_calendario = f'''CREATE TABLE IF NOT EXISTS {razao_empresa_2}           
                     (dia_mes_ano VARCHAR(8) NOT NULL,
                      email_empressa VARCHAR NOT NULL,
-                     nota_Dia VARCHAR NOT NULL)'''
+                     nota_Dia VARCHAR NOT NULL, empresa_id integer REFERENCES empresa)'''
     cursor.execute(script_tabela_calendario)
     connection.commit()
     return {}, 201
+
+""""""""""""""""""""""""""""""""""""
+
+#TEMPORÁRIO
+# @empresa_bp.route("/agendamento", methods=["POST"])
+# def create():
+#     body = request.json
+#     insert_sql_teste = """
+#     INSERT INTO empresa_id (dia_mes_ano, email_empressa, nota_Dia) VALUES(%s, %s, %s);
+#     """
+#     insert_tuple_test = (body["dia_mes_ano"]), (body["email_empressa"]), (body["nota_Dia"])
+#     cursor.execute(insert_sql_teste, insert_tuple_test,)     
+    
+#     return {}, 201 
+
+  
+
+""""""""""""""""""""""""""""""""""""
 
 # READ
 @empresa_bp.route("/empresa/all", methods=["GET"])
@@ -51,9 +68,8 @@ def update(empresa_id):
     update_sql = """
     UPDATE empresa SET razao = %s, cnpj = %s, telefone = %s, email = %s, cep = %s, endereco = %s, numero = %s, bloco = %s, bairro = %s, cidade = %s, uf = %s, senha = %s WHERE id = %s
     """
-    #hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
-    update_tuple = (body["razao"], body["cnpj"], body["telefone"], body["email"], body["cep"], body["endereco"], body["numero"], body["bloco"], body["bairro"], body["cidade"], body["uf"], 
-    (body["senha"]), empresa_id)
+    hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
+    update_tuple = (body["razao"], body["cnpj"], body["telefone"], body["email"], body["cep"], body["endereco"], body["numero"], body["bloco"], body["bairro"], body["cidade"], body["uf"], hashed.decode("utf-8"), empresa_id)
     cursor.execute(update_sql, update_tuple)
     connection.commit()
     return {}, 200
