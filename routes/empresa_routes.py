@@ -15,32 +15,14 @@ def create():
     cursor.execute(insert_sql, insert_tuple,)     
     connection.commit()
     razao_empresa = body["razao"]   
-    razao_empresa_2 = razao_empresa.replace(' ', '_')
-    script_tabela_calendario = f'''CREATE TABLE IF NOT EXISTS {razao_empresa_2}           
-                    (dia_mes_ano VARCHAR(8) NOT NULL,
-                     email_empressa VARCHAR NOT NULL,
-                     nota_Dia VARCHAR NOT NULL, empresa_id integer REFERENCES empresa)'''
+    razao_cliente = razao_empresa.replace(' ', '_')
+    script_tabela_calendario = f'''CREATE TABLE IF NOT EXISTS {razao_cliente}           
+                    (id serial PRIMARY KEY, dia_mes_ano VARCHAR(8) NOT NULL,
+                     cliente VARCHAR(50) NOT NULL, hora VARCHAR NOT NULL,
+                     servico VARCHAR NOT NULL, empresa_id integer REFERENCES empresa)'''
     cursor.execute(script_tabela_calendario)
     connection.commit()
     return {}, 201
-
-""""""""""""""""""""""""""""""""""""
-
-#TEMPORÁRIO
-# @empresa_bp.route("/agendamento", methods=["POST"])
-# def create():
-#     body = request.json
-#     insert_sql_teste = """
-#     INSERT INTO empresa_id (dia_mes_ano, email_empressa, nota_Dia) VALUES(%s, %s, %s);
-#     """
-#     insert_tuple_test = (body["dia_mes_ano"]), (body["email_empressa"]), (body["nota_Dia"])
-#     cursor.execute(insert_sql_teste, insert_tuple_test,)     
-    
-#     return {}, 201 
-
-  
-
-""""""""""""""""""""""""""""""""""""
 
 # READ
 @empresa_bp.route("/empresa/all", methods=["GET"])
