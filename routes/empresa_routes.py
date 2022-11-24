@@ -14,14 +14,13 @@ def create():
     insert_tuple = (body["razao"]), (body["cnpj"]), (body["telefone"]), (body["email"]), (body["cep"]), (body["endereco"]), (body["numero"]), (body["bloco"]), (body["bairro"]), (body["cidade"]), (body["uf"]), hashed.decode("utf-8")
     cursor.execute(insert_sql, insert_tuple,)     
     connection.commit()
-    razao_empresa = body["razao"]   
-    razao_cliente = razao_empresa.replace(' ', '_')
-    script_tabela_calendario = f'''CREATE TABLE IF NOT EXISTS {razao_cliente}           
-                    (id serial PRIMARY KEY, dia_mes_ano VARCHAR(8) NOT NULL,
-                     cliente VARCHAR(50) NOT NULL, hora VARCHAR NOT NULL,
-                     servico VARCHAR NOT NULL, empresa_id integer REFERENCES empresa)'''
-    cursor.execute(script_tabela_calendario)
-    connection.commit()
+    # razao_empresa = body["razao"]   
+    # # razao_cliente = razao_empresa.replace(' ', '_')
+    # script_tabela_calendario = f'''CREATE TABLE IF NOT EXISTS agenda_todas_empresas           
+    #                 (dia_mes_ano VARCHAR(8) NOT NULL,
+    #                  email_empresa VARCHAR(255) NOT NULL, anotacao VARCHAR NOT NULL)'''
+    # cursor.execute(script_tabela_calendario)
+    # connection.commit()
     return {}, 201
 
 # READ

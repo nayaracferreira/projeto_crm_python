@@ -22,11 +22,23 @@ def read():
         return {"Essa empresa não consta em nosso registro": False}, 200
 
 
+
+
+
+
+
+
+
+
+
+        
+
+
 #SELECIONA UM DIA ESPECÍFICO
 @calendario_bp.route("/agendamento/dia", methods=["GET"])
 def read_day():
     body = request.json
-    dia = body["dia_mes_ano"]   
+    dia = (body["dia_mes_ano"])      
     select_sql = """
     SELECT * FROM testando WHERE dia_mes_ano = %s
     """
@@ -34,6 +46,31 @@ def read_day():
     verifica_dia = cursor.fetchall()
     connection.commit()     
     return {"testando": verifica_dia,}, 200
+
+
+
+# def read_day(empresa_id):
+#     body = request.json
+#     dia_1 = (body["dia_mes_ano"])      
+#     select_sql = f"""
+#     SELECT * FROM {empresa_id} WHERE {dia_1}
+#     """
+#     cursor.execute(select_sql, (dia_1,))
+#     verifica_dia = cursor.fetchall()
+#     connection.commit()     
+#     return {"empresa_id": verifica_dia,}, 200
+
+
+
+
+
+
+
+
+
+
+
+
 
 # SELECIONA TODOS OS DIAS  
 @calendario_bp.route("/agendamento/all", methods=["GET"])
