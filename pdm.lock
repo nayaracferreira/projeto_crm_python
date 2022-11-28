@@ -32,6 +32,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "flask-cors"
+version = "3.0.10"
+summary = "A Flask extension adding a decorator for CORS support"
+dependencies = [
+    "Flask>=0.9",
+    "Six",
+]
+
+[[package]]
 name = "flask-login"
 version = "0.6.2"
 requires_python = ">=3.7"
@@ -69,6 +78,12 @@ requires_python = ">=3.6"
 summary = "psycopg2 - Python-PostgreSQL Database Adapter"
 
 [[package]]
+name = "six"
+version = "1.16.0"
+requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+summary = "Python 2 and 3 compatibility utilities"
+
+[[package]]
 name = "werkzeug"
 version = "2.2.2"
 requires_python = ">=3.7"
@@ -79,7 +94,7 @@ dependencies = [
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:1cdfae57474ff09458b93acfcd8860c97244d466131f1e05e8586ae8c77b5015"
+content_hash = "sha256:469ed66e4ede1ee80e097edda4e0f3fb1ff75aa3f00b2c8d83beefb76a238ae2"
 
 [metadata.files]
 "bcrypt 4.0.1" = [
@@ -116,6 +131,10 @@ content_hash = "sha256:1cdfae57474ff09458b93acfcd8860c97244d466131f1e05e8586ae8c
 "flask 2.2.2" = [
     {url = "https://files.pythonhosted.org/packages/0f/43/15f4f9ab225b0b25352412e8daa3d0e3d135fcf5e127070c74c3632c8b4c/Flask-2.2.2-py3-none-any.whl", hash = "sha256:b9c46cc36662a7949f34b52d8ec7bb59c0d74ba08ba6cb9ce9adc1d8676d9526"},
     {url = "https://files.pythonhosted.org/packages/69/b6/53cfa30eed5aa7343daff36622843688ba8c6fe9829bb2b92e193ab1163f/Flask-2.2.2.tar.gz", hash = "sha256:642c450d19c4ad482f96729bd2a8f6d32554aa1e231f4f6b4e7e5264b16cca2b"},
+]
+"flask-cors 3.0.10" = [
+    {url = "https://files.pythonhosted.org/packages/cf/25/e3b2553d22ed542be807739556c69621ad2ab276ae8d5d2560f4ed20f652/Flask-Cors-3.0.10.tar.gz", hash = "sha256:b60839393f3b84a0f3746f6cdca56c1ad7426aa738b70d6c61375857823181de"},
+    {url = "https://files.pythonhosted.org/packages/db/84/901e700de86604b1c4ef4b57110d4e947c218b9997adf5d38fa7da493bce/Flask_Cors-3.0.10-py2.py3-none-any.whl", hash = "sha256:74efc975af1194fc7891ff5cd85b0f7478be4f7f59fe158102e91abb72bb4438"},
 ]
 "flask-login 0.6.2" = [
     {url = "https://files.pythonhosted.org/packages/a6/94/01b658bef1863a07f4738a322cce87d97be4362645255dc1182f7f5c075a/Flask_Login-0.6.2-py3-none-any.whl", hash = "sha256:1ef79843f5eddd0f143c2cd994c1b05ac83c0401dc6234c143495af9a939613f"},
@@ -231,6 +250,10 @@ content_hash = "sha256:1cdfae57474ff09458b93acfcd8860c97244d466131f1e05e8586ae8c
     {url = "https://files.pythonhosted.org/packages/f6/56/4c1186774f1dd75b1492e3fabc8b5c57d213ebc412e7d38de2813918bad4/psycopg2_binary-2.9.3-cp310-cp310-win32.whl", hash = "sha256:7b1e9b80afca7b7a386ef087db614faebbf8839b7f4db5eb107d0f1a53225029"},
     {url = "https://files.pythonhosted.org/packages/f7/96/4a14ba6336e21616483ef77c6d1dab5176016eb7242d9123b2151668f317/psycopg2_binary-2.9.3-cp38-cp38-macosx_10_14_x86_64.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:def68d7c21984b0f8218e8a15d514f714d96904265164f75f8d3a70f9c295667"},
     {url = "https://files.pythonhosted.org/packages/fc/d8/1689425fc7c1dfd026715e6e92d3ed2f6f706c38afd711678abe002309ab/psycopg2_binary-2.9.3-cp36-cp36m-macosx_10_14_x86_64.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:e847774f8ffd5b398a75bc1c18fbb56564cda3d629fe68fd81971fece2d3c67e"},
+]
+"six 1.16.0" = [
+    {url = "https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+    {url = "https://files.pythonhosted.org/packages/d9/5a/e7c31adbe875f2abbb91bd84cf2dc52d792b5a01506781dbcf25c91daf11/six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
 ]
 "werkzeug 2.2.2" = [
     {url = "https://files.pythonhosted.org/packages/c8/27/be6ddbcf60115305205de79c29004a0c6bc53cec814f733467b1bb89386d/Werkzeug-2.2.2-py3-none-any.whl", hash = "sha256:f979ab81f58d7318e064e99c4506445d60135ac5cd2e177a2de0089bfd4c9bd5"},
