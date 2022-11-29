@@ -4,7 +4,7 @@ import bcrypt
 
 login_bp = Blueprint("login", __name__)
 
-@login_bp.route("/login", methods=["GET"])
+@login_bp.route("/login", methods=["POST"])
 def login():
     body = request.json
     email = body["email"]    
