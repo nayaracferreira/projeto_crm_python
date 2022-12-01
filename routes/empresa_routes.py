@@ -7,7 +7,7 @@ empresa_bp = Blueprint("empresa", __name__)
 # CREATE
 @empresa_bp.route("/empresa", methods=["POST"])
 def create():
-    body = request.json    
+    body = request.json  
     insert_sql = """
     INSERT INTO empresas (razao, cnpj, telefone, email, cep, endereco, numero, bloco, bairro, cidade, uf, senha) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);    """
     hashed = bcrypt.hashpw(body["senha"].encode("utf-8"), bcrypt.gensalt())
