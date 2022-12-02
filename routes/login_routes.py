@@ -8,7 +8,7 @@ login_bp = Blueprint("login", __name__)
 def login():
     body = request.json
     email = body["email"]    
-    select_sql = """ SELECT senha FROM empresa WHERE email = %s """
+    select_sql = """ SELECT senha FROM empresas WHERE email = %s """
     cursor.execute(select_sql, (email,))
     empresa = cursor.fetchone()
   
